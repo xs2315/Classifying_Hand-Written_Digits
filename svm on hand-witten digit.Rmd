@@ -1,0 +1,57 @@
+---
+title: "svm on hand-written digit"
+author: "Xiaodi Sun"
+date: "2018/3/16"
+output: pdf_document
+---
+
+(1)
+
+```{r}
+library(e1071)
+set.seed(1)
+zip_5<-read.csv("train.5.txt",header = F,sep=",")
+zip_6<-read.csv("train.6.txt",header = F,sep=",")
+n.5<-length(zip_5[,1])
+n.6<-length(zip_6[,1])
+zip_5<-cbind(rep(1,n.5),zip_5)
+zip_6<-cbind(rep(-1,n.6),zip_6)
+names(zip_5)<-c("class",as.character(1:256))
+names(zip_6)<-c("class",as.character(1:256))
+data<-rbind(zip_5,zip_6)
+data<-data.frame(data)
+data[,1]<-as.factor(data[,1])
+indices<-sample(1:nrow(data),0.2*nrow(data),replace = F)
+test<-data[indices,]
+train<-data[-indices,]
+
+## (a)
+## plot of the rate as a function of the margin parameter in the linear   ## case.
+obj = tune.svm(class ~., data = train, kernel = "linear",
+                      cost = 2^seq(-9, -4, by = 0.25),
+                      scale = FALSE)
+summary(obj)
+plot(obj)
+
+## (b)
+## plot of the rate as function of the margin parameter and the kernel    ## bandwidth in the non-linear case 
+obj2 = tune.svm(class ~., data = train, kernel = "radial",
+                   cost = 2^seq(-5, -4, by = .25),
+                   gamma = seq(.001, .01, by = .002),
+                   scale = FALSE)
+summary(obj2)
+plot(obj2)
+```
+
+(2)
+
+```{r}
+## linear model
+svm.pred  <- predict(obj$best.model, test[,-1])
+mean(svm.pred!=test[,1])
+
+## nonlinear model
+svm.pred2  <- predict(obj2$best.model, test[,-1])
+mean(svm.pred2!=test[,1])
+```
+For the linear case, the misclassification rate is 0.01639344. For the nonlinear case, the misclassification rate is 0.004098361. Thus, I think the nonlinear SVM is a good choice for this data. 
