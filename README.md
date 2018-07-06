@@ -9,4 +9,4 @@ Process:
 Result:
 
 1.  Plot the cross-validation estimates of the misclassification rate.  Please plot the rate as(a)  a function of the margin parameter in the linear case.(b)  a function of the margin parameter and the kernel bandwidth in the non-linear case (you are encouragedto use heat map here).
-2.  Report  the  test  set  estimates  of  the  misclassification  rates  for  both  cases,  with  the  parameter  values  youhave selected, and compare the two results.  Is a linear SVM a good choice for this data, or should we usea non-linear one?
+2.  Report  the  test  set  estimates  of  the  misclassification  rates  for  both  cases,  with  the  parameter  values  youhave selected, and compare the two results. Then discuss whether linear SVM a good choice or non-linear one?
