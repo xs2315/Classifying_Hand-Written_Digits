@@ -1,10 +1,10 @@
 # Classifying_Hand-Written_Digits
 Process:
 
-•Randomly select about 20% of the data and set it aside as a test set.
-•Train a linear SVM with soft margin.  Cross-validate the margin parameter.
-•Train  an  SVM  with  soft  margin  and  RBF  kernel.   You  will  have  to  cross-validate  both  the  soft-margin parameter and the kernel bandwidth.
-•After you have selected parameter values for both algorithms, train each one with the parameter value you have chosen.  Then compute the misclassification rate (the proportion of misclassified data points) on thetest set.
+1. Randomly select about 20% of the data and set it aside as a test set
+2. Train a linear SVM with soft margin and Cross-validated the margin parameter
+3. Train a SVM with soft margin and RBF kernel and cross-validate both the soft-margin parameter and the kernel bandwidth
+4. Compute the misclassification rate on the test set and compare the results
 
 Result:
 
